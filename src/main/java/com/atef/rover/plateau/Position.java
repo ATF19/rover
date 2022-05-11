@@ -1,4 +1,4 @@
-package com.atef.rover;
+package com.atef.rover.plateau;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ public class Position {
     private Direction direction;
     private final Grid grid;
 
-    Position(int x, int y, Direction direction, Grid grid) {
+    public Position(int x, int y, Direction direction, Grid grid) {
         this.x = x;
         this.y = y;
         this.direction = direction;

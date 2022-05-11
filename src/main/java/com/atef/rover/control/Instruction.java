@@ -1,4 +1,4 @@
-package com.atef.rover;
+package com.atef.rover.control;
 
 import java.util.Arrays;
 

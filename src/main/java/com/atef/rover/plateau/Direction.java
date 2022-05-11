@@ -1,4 +1,4 @@
-package com.atef.rover;
+package com.atef.rover.plateau;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ public enum Direction {
     EAST('E'),
     SOUTH('S');
 
-    private final char value;
+    public final char value;
 
     Direction(char value) {
         this.value = value;

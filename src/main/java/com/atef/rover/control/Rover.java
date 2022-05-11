@@ -1,4 +1,8 @@
-package com.atef.rover;
+package com.atef.rover.control;
+
+import com.atef.rover.plateau.Position;
+
+import java.util.Objects;
 
 public class Rover {
     private Position position;
@@ -25,5 +29,25 @@ public class Rover {
 
     public Position position() {
         return position;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rover rover = (Rover) o;
+        return Objects.equals(position, rover.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
+    }
+
+    @Override
+    public String toString() {
+        return "Rover{" +
+                "position=" + position +
+                '}';
     }
 }

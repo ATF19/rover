@@ -1,5 +1,8 @@
-package com.atef.rover;
+package com.atef.rover.plateau;
 
+import com.atef.rover.plateau.Direction;
+import com.atef.rover.plateau.Grid;
+import com.atef.rover.plateau.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

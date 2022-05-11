@@ -1,5 +1,6 @@
-package com.atef.rover;
+package com.atef.rover.control;
 
+import com.atef.rover.control.Instruction;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
