@@ -3,8 +3,8 @@ package com.atef.rover;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 class RoverTest {
 
@@ -18,23 +18,107 @@ class RoverTest {
     }
 
     @Test
-    public void delegate_change_direction_to_position() {
+    public void turn_left_when_rover_is_directed_to_north() {
         // given
-        Direction newDirection = Direction.NORTH;
+        given(position.direction()).willReturn(Direction.NORTH);
 
         // when
-        rover.changeDirection(newDirection);
+        rover.handleInstruction(Instruction.TURN_LEFT);
 
         // then
-        verify(position).changeDirection(newDirection);
+        verify(position).changeDirection(Direction.WEST);
     }
 
     @Test
-    public void delegate_move_to_position() {
+    public void turn_right_when_rover_is_directed_to_north() {
+        // given
+        given(position.direction()).willReturn(Direction.NORTH);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_RIGHT);
+
+        // then
+        verify(position).changeDirection(Direction.EAST);
+    }
+
+    @Test
+    public void turn_left_when_rover_is_directed_to_east() {
+        // given
+        given(position.direction()).willReturn(Direction.EAST);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_LEFT);
+
+        // then
+        verify(position).changeDirection(Direction.NORTH);
+    }
+
+    @Test
+    public void turn_right_when_rover_is_directed_to_east() {
+        // given
+        given(position.direction()).willReturn(Direction.EAST);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_RIGHT);
+
+        // then
+        verify(position).changeDirection(Direction.SOUTH);
+    }
+
+    @Test
+    public void turn_left_when_rover_is_directed_to_south() {
+        // given
+        given(position.direction()).willReturn(Direction.SOUTH);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_LEFT);
+
+        // then
+        verify(position).changeDirection(Direction.EAST);
+    }
+
+    @Test
+    public void turn_right_when_rover_is_directed_to_south() {
+        // given
+        given(position.direction()).willReturn(Direction.SOUTH);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_RIGHT);
+
+        // then
+        verify(position).changeDirection(Direction.WEST);
+    }
+
+    @Test
+    public void turn_left_when_rover_is_directed_to_west() {
+        // given
+        given(position.direction()).willReturn(Direction.WEST);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_LEFT);
+
+        // then
+        verify(position).changeDirection(Direction.SOUTH);
+    }
+
+    @Test
+    public void turn_right_when_rover_is_directed_to_west() {
+        // given
+        given(position.direction()).willReturn(Direction.SOUTH);
+
+        // when
+        rover.handleInstruction(Instruction.TURN_RIGHT);
+
+        // then
+        verify(position).changeDirection(Direction.WEST);
+    }
+
+    @Test
+    public void move_rover() {
         // given
 
         // when
-        rover.move();
+        rover.handleInstruction(Instruction.MOVE);
 
         // then
         verify(position).move();

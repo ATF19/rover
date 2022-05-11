@@ -1,15 +1,24 @@
 package com.atef.rover;
 
+import java.util.Arrays;
+
 public enum Direction {
     NORTH('N'),
     WEST('W'),
     EAST('E'),
     SOUTH('S');
 
-    public final char value;
+    private final char value;
 
     Direction(char value) {
         this.value = value;
+    }
+
+    public static Direction valueOf(char value) {
+        return Arrays.stream(values())
+                .filter(d -> d.value == value)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Direction " + value + " is unknown."));
     }
 
     public Direction turnLeft() {

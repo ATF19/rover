@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class DirectionTest {
 
@@ -106,5 +107,38 @@ class DirectionTest {
 
         // then
         assertThat(result).isEqualTo(Direction.SOUTH);
+    }
+
+    @Test
+    public void create_direction_from_ra_value() {
+        // given
+        char n = 'N';
+        char e = 'E';
+        char w = 'W';
+        char s = 'S';
+
+        // when
+        Direction north = Direction.valueOf(n);
+        Direction east = Direction.valueOf(e);
+        Direction west = Direction.valueOf(w);
+        Direction south = Direction.valueOf(s);
+
+        // then
+        assertThat(north).isEqualTo(Direction.NORTH);
+        assertThat(east).isEqualTo(Direction.EAST);
+        assertThat(west).isEqualTo(Direction.WEST);
+        assertThat(south).isEqualTo(Direction.SOUTH);
+    }
+
+    @Test
+    public void throw_error_if_provided_with_wrong_raw_direction() {
+        // given
+        char i = 'i';
+
+        // when
+
+        // then
+        assertThatThrownBy(() -> Direction.valueOf(i))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
