@@ -4,14 +4,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PositionTest {
 
     private Position position;
+    private Grid grid;
 
     @BeforeEach
     public void setup() {
-        position = new Position(1, 2, Direction.NORTH);
+        grid = new Grid(5, 5);
+        position = new Position(1, 2, Direction.NORTH, grid);
     }
 
     @Test
@@ -75,5 +78,18 @@ class PositionTest {
         // then
         assertThat(position.x()).isEqualTo(2);
         assertThat(position.y()).isEqualTo(2);
+    }
+
+    @Test
+    public void throw_error_if_trying_to_move_to_position_outside_the_grid() {
+        // given
+        grid = new Grid(2, 3);
+        position = new Position(2, 2, Direction.EAST, grid);
+
+        // when
+
+        // then
+        assertThatThrownBy(() -> position.move())
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

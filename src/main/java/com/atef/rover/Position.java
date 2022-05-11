@@ -6,11 +6,13 @@ public class Position {
     private int x;
     private int y;
     private Direction direction;
+    private final Grid grid;
 
-    Position(int x, int y, Direction direction) {
+    Position(int x, int y, Direction direction, Grid grid) {
         this.x = x;
         this.y = y;
         this.direction = direction;
+        this.grid = grid;
     }
 
     public void changeDirection(Direction direction) {
@@ -18,20 +20,35 @@ public class Position {
     }
 
     public void move() {
+        int newX = x;
+        int newY = y;
         switch (direction) {
             case NORTH:
-                y++;
+                newY = y + 1;
                 break;
             case SOUTH:
-                y--;
+                newY = y - 1;
                 break;
             case WEST:
-                x--;
+                newX = x - 1;
                 break;
             case EAST:
-                x++;
+                newX = x + 1;
                 break;
         }
+        verifyNewPositionIsInTheGrid(newX, newY);
+
+        x = newX;
+        y = newY;
+    }
+
+    private void verifyNewPositionIsInTheGrid(int newX, int newY) {
+        if (isNotWithinBoundaries(newX, grid.width) || isNotWithinBoundaries(newY, grid.height))
+            throw new IllegalArgumentException("Cannot move to position, it is outside the grid.");
+    }
+
+    private boolean isNotWithinBoundaries(int coordinate, int size) {
+        return coordinate < 0 || coordinate > size;
     }
 
     public int x() {
